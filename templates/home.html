@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Attendance System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="background-container">
+    <div class="overlay">
+      <header>
+        <img src="{{ url_for('static', filename='ndu_logo.png') }}" alt="NIELIT Logo" class="logo">
+        <h2 class="tagline">NIELIT - Smart Face Attendance</h2>
+      </header>
+
+      <div class="glass-card">
+        <h1>👨‍💻 Welcome to Smart Face Attendance System</h1>
+        <p class="welcome-line">"Powered by PANKAJ"</p>
+        <div class="button-box">
+          <a href="{{ url_for('register') }}" class="btn">➕ Register Student</a>
+          <a href="{{ url_for('attendance') }}" class="btn">🎥 Mark Attendance</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

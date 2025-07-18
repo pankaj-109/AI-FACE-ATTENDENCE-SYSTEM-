@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register Student</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* Minimal internal CSS if style.css not updated */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #2c3e50, #3498db);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      width: 360px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: border-color 0.3s ease;
+    }
+
+    form input:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      background-color: #3498db;
+      color: white;
+      padding: 10px;
+      border: none;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    #camera {
+      margin-top: 20px;
+      width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register New Student</h2>
+    <form method="POST">
+      <input type="text" name="name" placeholder="Name" required />
+      <input type="text" name="roll" placeholder="Roll Number" required />
+      <input type="text" name="branch" placeholder="Branch" required />
+      <input type="number" name="age" placeholder="Age" required />
+      <input type="text" name="address" placeholder="Address" required />
+      <input type="text" name="contact" placeholder="Contact" required />
+      <input type="hidden" name="image" id="image_data" />
+      <button type="submit">Register</button>
+    </form>
+    <video id="camera" autoplay muted></video>
+  </div>
+
+  <script>
+    const video = document.getElementById('camera');
+    const image_input = document.getElementById('image_data');
+
+    navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+      video.srcObject = stream;
+    });
+
+    setTimeout(() => {
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d').drawImage(video, 0, 0);
+      image_input.value = canvas.toDataURL('image/jpeg');
+    }, 5000);  // capture after 5 seconds
+  </script>
+</body>
+</html>
